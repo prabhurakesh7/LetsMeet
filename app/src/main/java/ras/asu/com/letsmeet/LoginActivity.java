@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

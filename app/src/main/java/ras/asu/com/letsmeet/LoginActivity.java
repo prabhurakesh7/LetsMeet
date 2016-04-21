@@ -1,14 +1,5 @@
 package ras.asu.com.letsmeet;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -20,6 +11,19 @@ import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -28,20 +32,19 @@ public class LoginActivity extends AppCompatActivity {
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-    Button INVITE;
     Button btnShowLocation;
-    //GPSTracker gps;
+    GPSTracker gps;
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        //btnShowLocation = (Button) findViewById(R.id.getloc);
+        btnShowLocation = (Button) findViewById(R.id.getloc);
 
         // show location button click event
-        /*btnShowLocation.setOnClickListener(new View.OnClickListener() {
+        btnShowLocation.setOnClickListener(new View.OnClickListener() {
 
-           /* @Override
+            @Override
             public void onClick(View arg0) {
                 // create class object
                 gps = new GPSTracker(LoginActivity.this);
@@ -62,8 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             }
-        }
-        );*/
+        });
 
     }
 
@@ -71,9 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        INVITE = (Button)findViewById(R.id.button1);
-        Intent intent = new Intent(LoginActivity.this, Invitation.class) ;
 
 
         /*Facebook button and manager*/
@@ -95,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         HttpMethod.GET,
                         new GraphRequest.Callback() {
                             public void onCompleted(GraphResponse response) {
-                                Intent intent = new Intent(LoginActivity.this, ImageTextListViewActivity.class);
+                                Intent intent = new Intent(LoginActivity.this,findfriends.class);
                                 try {
                                     JSONArray rawName = response.getJSONObject().getJSONArray("data");
                                     intent.putExtra("jsondata", rawName.toString());
@@ -108,8 +107,6 @@ public class LoginActivity extends AppCompatActivity {
                 ).executeAsync();
                 //info.setText("User ID: " + loginResult.getAccessToken().getUserId()  + "\n" +  "Auth Token: " + loginResult.getAccessToken().getToken() );
                 Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(LoginActivity.this, MenuList.class);
-                startActivity(intent1);
             }
 
             @Override
@@ -127,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 

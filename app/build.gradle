@@ -5,9 +5,10 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "ras.asu.com.letsmeet"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
+        multiDexEnabled true 
         versionName "1.0"
     }
     buildTypes {
@@ -22,12 +23,24 @@ android {
 repositories {
     mavenCentral()
 }
+
+
 dependencies {
+
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile 'com.google.android.gms:play-services:8.4.0'
+ compile('com.mikepenz:materialdrawer:5.1.9@aar') {
+        transitive = true
+    }
+    compile 'info.hoang8f:fbutton:1.0.5'
+
 }
+
+
 
